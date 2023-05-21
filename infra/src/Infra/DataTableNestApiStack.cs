@@ -1,8 +1,11 @@
 ﻿using Amazon.CDK;
 using Constructs;
-using Amazon.CDK.AWS.APIGateway;
 using Amazon.CDK.AWS.Lambda;
 using Amazon.CDK.AWS.DynamoDB;
+using Amazon.CDK.AWS.Apigatewayv2.Alpha;
+using Amazon.CDK.AWS.Apigatewayv2.Integrations.Alpha;
+using HttpMethod = Amazon.CDK.AWS.Apigatewayv2.Alpha.HttpMethod;
+using Amazon.CDK.AWS.Apigatewayv2.Authorizers.Alpha;
 
 namespace Infra
 {
@@ -10,18 +13,31 @@ namespace Infra
     {
         internal DataTableNestApiStack(Construct scope, string id, IStackProps props = null) : base(scope, id, props)
         {
-            var api = new RestApi(this, "data-table-nest-api");
+            var issuer = "https://dev-77r3tluzofdan1kf.us.auth0.com/";
+            var authorizer = new HttpJwtAuthorizer("JwtAuthorizer", issuer, new HttpJwtAuthorizerProps
+            {
+                JwtAudience = new[] { "https://data-table-nest-api" }
+            });
+
+            var api = new HttpApi(this, "data-table-nest-api");
 
             var tablesGetLambda = new Function(this, "TablesGet", new FunctionProps
             {
                 Code = Code.FromAsset("../code/TablesGet/src/bin/Release/net6.0/src.zip"),
                 Handler = "TablesGet::TablesGet.Function::FunctionHandlerAsync",
                 Runtime = Runtime.DOTNET_6,
-                Timeout = Duration.Seconds(30)
+                Timeout = Duration.Seconds(30),        
             });
 
-            var tables = api.Root.AddResource("tables");
-            tables.AddMethod("GET", new LambdaIntegration(tablesGetLambda));
+            var tablesGetLambdaIntegration = new HttpLambdaIntegration("TablesGetLambdaIntegration", tablesGetLambda);
+
+            api.AddRoutes(new AddRoutesOptions
+            {
+                Path = "/tables",
+                Methods = new[] { HttpMethod.GET },
+                Integration = tablesGetLambdaIntegration,
+                Authorizer = authorizer
+            });
 
             var table = new Table(this, "tablesTable", new TableProps
             {

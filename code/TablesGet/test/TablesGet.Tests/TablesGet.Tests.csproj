@@ -12,6 +12,6 @@
     <PackageReference Include="xunit.runner.visualstudio" Version="2.4.5" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\src\TablesGet\TablesGet.csproj" />
+    <ProjectReference Include="..\..\src\TablesGet.csproj" />
   </ItemGroup>
 </Project>
