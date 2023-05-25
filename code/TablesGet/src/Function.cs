@@ -18,7 +18,7 @@ public class Function
 
     public async Task<APIGatewayProxyResponse> FunctionHandlerAsync(APIGatewayProxyRequest request, ILambdaContext context)
     {
-        var decodedToken = AuthorizationHelpers.DecodeJwtToken(request.Headers["Authorization"]);
+        var decodedToken = AuthorizationHelpers.DecodeJwtToken(request.Headers["authorization"]);
 
         var dynamoDbClient = new AmazonDynamoDBClient();
         var dynamoDBContext = new DynamoDBContext(dynamoDbClient);

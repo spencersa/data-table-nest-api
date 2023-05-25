@@ -84,6 +84,7 @@ namespace Infra
             writeAutoScaling.ScaleOnUtilization(new UtilizationScalingProps { TargetUtilizationPercent = 75 });
 
             table.GrantReadData(tablesGetLambda);
+            table.GrantWriteData(tablesPostLambda);
         }
     }
 }

@@ -6,6 +6,9 @@ namespace TablesLibrary
     {
         public static JwtSecurityToken DecodeJwtToken(string token)
         {
+            if (token.StartsWith("Bearer ", StringComparison.InvariantCultureIgnoreCase)) {
+                token = token.Substring("Bearer ".Length);
+            }
             return new JwtSecurityTokenHandler().ReadJwtToken(token);
         }
     }
