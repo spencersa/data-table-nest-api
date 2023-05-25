@@ -13,7 +13,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\TablesGet\src\TablesGet.csproj" />
-    <ProjectReference Include="..\TablesPost\src\TablesPost\TablesPost.csproj" />
+    <ProjectReference Include="..\TablesPost\src\TablesPost.csproj" />
   </ItemGroup>
 
 </Project>

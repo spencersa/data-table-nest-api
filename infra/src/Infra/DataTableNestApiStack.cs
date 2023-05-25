@@ -29,7 +29,16 @@ namespace Infra
                 Timeout = Duration.Seconds(30),        
             });
 
+            var tablesPostLambda = new Function(this, "TablesPost", new FunctionProps
+            {
+                Code = Code.FromAsset("../code/TablesPost/src/bin/Release/net6.0/src.zip"),
+                Handler = "TablesPost::TablesPost.Function::FunctionHandlerAsync",
+                Runtime = Runtime.DOTNET_6,
+                Timeout = Duration.Seconds(30),
+            });
+
             var tablesGetLambdaIntegration = new HttpLambdaIntegration("TablesGetLambdaIntegration", tablesGetLambda);
+            var tablesPostLambdaIntegration = new HttpLambdaIntegration("TablesPostLambdaIntegration", tablesPostLambda);
 
             api.AddRoutes(new AddRoutesOptions
             {
@@ -38,6 +47,15 @@ namespace Infra
                 Integration = tablesGetLambdaIntegration,
                 Authorizer = authorizer
             });
+
+            api.AddRoutes(new AddRoutesOptions
+            {
+                Path = "/tables",
+                Methods = new[] { HttpMethod.POST },
+                Integration = tablesPostLambdaIntegration,
+                Authorizer = authorizer
+            });
+
 
             var table = new Table(this, "tablesTable", new TableProps
             {
