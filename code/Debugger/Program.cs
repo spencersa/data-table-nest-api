@@ -1,0 +1,16 @@
+﻿// See https://aka.ms/new-console-template for more information
+
+using Amazon.Lambda.APIGatewayEvents;
+using Amazon.Lambda.TestUtilities;
+using TablesPost;
+
+var function = new Function();
+var apiGatewayProxyRequest = new APIGatewayProxyRequest();
+var context = new TestLambdaContext();
+
+apiGatewayProxyRequest.Headers = new Dictionary<string, string>
+{
+    ["Authorization"] = "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6Im1UY3UwMndxQXdOT25pQVZyRkxHaiJ9.eyJpc3MiOiJodHRwczovL2Rldi03N3IzdGx1em9mZGFuMWtmLnVzLmF1dGgwLmNvbS8iLCJzdWIiOiJnb29nbGUtb2F1dGgyfDExNjU4MDk0MTY3MzYwMTczNjQzNyIsImF1ZCI6WyJodHRwczovL2RhdGEtdGFibGUtbmVzdC1hcGkiLCJodHRwczovL2Rldi03N3IzdGx1em9mZGFuMWtmLnVzLmF1dGgwLmNvbS91c2VyaW5mbyJdLCJpYXQiOjE2ODQ3OTk5NzgsImV4cCI6MTY4NDg4NjM3OCwiYXpwIjoiSVdwMUhFTnhwalhyWnVVYmFGR2RteVZUNmpxbXQ0Y00iLCJzY29wZSI6Im9wZW5pZCBwcm9maWxlIGVtYWlsIn0.ACmpA6xnib3eaIP8NT7uvHoGcucrC9HebKhyF0kzbRs2Tp8gye5pOKXJ1aetkBuTqWgRzNg3m5fQpobr2XLaJnKv3Mp6JREEvz1z-k7Bp1Kxboo1S6SYn1MDVt0S6gPGoM2JQwAkYzGEKOFJq1o2iYK2ZLyUzSyu5KtWvWBNQPeoWTBDHjAijKz34Y_37_hTK4IwrVbvX3D8YWsJlalKrMjcvTM_s3i-vteqmx50qARFg-yNhxqFTD9XfppWYd-reitpRWNRyPl3O4m1VErrBfd1PLxqqbQlBKCGbYetlLMOZXhysgSVe1Aj-70ewsGGgroxbqXVE3IhttZ3_XrJdQ"
+};
+
+var result = await function.FunctionHandlerAsync(apiGatewayProxyRequest, context);

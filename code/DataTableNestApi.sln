@@ -9,6 +9,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TablesLibrary", "TablesLibr
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TablesGet.Tests", "TablesGet\test\TablesGet.Tests\TablesGet.Tests.csproj", "{1A94CAAB-735B-42C1-964C-247035869759}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Debugger", "Debugger\Debugger.csproj", "{D3E5AADC-08D2-4B1E-A9C7-1F124ABDAF71}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TablesPost", "TablesPost\src\TablesPost\TablesPost.csproj", "{DCC0DF2D-CA36-4761-9F84-104B3661F513}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +31,14 @@ Global
 		{1A94CAAB-735B-42C1-964C-247035869759}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1A94CAAB-735B-42C1-964C-247035869759}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1A94CAAB-735B-42C1-964C-247035869759}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D3E5AADC-08D2-4B1E-A9C7-1F124ABDAF71}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D3E5AADC-08D2-4B1E-A9C7-1F124ABDAF71}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D3E5AADC-08D2-4B1E-A9C7-1F124ABDAF71}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D3E5AADC-08D2-4B1E-A9C7-1F124ABDAF71}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DCC0DF2D-CA36-4761-9F84-104B3661F513}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DCC0DF2D-CA36-4761-9F84-104B3661F513}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DCC0DF2D-CA36-4761-9F84-104B3661F513}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DCC0DF2D-CA36-4761-9F84-104B3661F513}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

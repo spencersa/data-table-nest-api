@@ -2,8 +2,8 @@ using Amazon.Lambda.Core;
 using Amazon.Lambda.APIGatewayEvents;
 using System.Net;
 using Amazon.DynamoDBv2;
-using Newtonsoft.Json;
 using TablesLibrary;
+using Newtonsoft.Json;
 using Amazon.DynamoDBv2.DataModel;
 using Amazon.DynamoDBv2.DocumentModel;
 using TablesLibrary.Models;
@@ -11,7 +11,7 @@ using TablesLibrary.Models;
 // Assembly attribute to enable the Lambda function's JSON input to be converted into a .NET class.
 [assembly: LambdaSerializer(typeof(Amazon.Lambda.Serialization.SystemTextJson.DefaultLambdaJsonSerializer))]
 
-namespace TablesGet;
+namespace TablesPost;
 
 public class Function
 {
@@ -23,18 +23,17 @@ public class Function
         var dynamoDbClient = new AmazonDynamoDBClient();
         var dynamoDBContext = new DynamoDBContext(dynamoDbClient);
 
-        var search = dynamoDBContext.FromQueryAsync<DataTable>(new QueryOperationConfig()
+        var dataTable = new DataTable
         {
-            IndexName = "userid",
-            Filter = new QueryFilter("userid", QueryOperator.Equal, decodedToken.Subject)
-        });
+            id = Guid.NewGuid().ToString(),
+            userid = decodedToken.Subject
+        };
 
-        var searchResponse = await search.GetRemainingAsync();
+        await dynamoDBContext.SaveAsync(dataTable);
 
         var response = new APIGatewayProxyResponse
         {
-            StatusCode = (int)HttpStatusCode.OK,
-            Body = JsonConvert.SerializeObject(searchResponse),
+            StatusCode = (int)HttpStatusCode.Created,
             Headers = new Dictionary<string, string> { { "Content-Type", "text/plain" } }
         };
 

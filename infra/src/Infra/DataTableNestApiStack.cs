@@ -41,16 +41,11 @@ namespace Infra
 
             var table = new Table(this, "tablesTable", new TableProps
             {
-                TableName = "tables",
+                TableName = "data-tables",
                 PartitionKey = new Attribute
                 {
-                    Name = "userid",
+                    Name = "id",
                     Type = AttributeType.STRING
-                },
-                SortKey = new Attribute
-                {
-                    Name = "unixtimestamp",
-                    Type = AttributeType.NUMBER
                 },
                 //TODO: REMOVE THIS AFTER TESTING
                 DeletionProtection = false,
@@ -58,6 +53,12 @@ namespace Infra
                 RemovalPolicy = RemovalPolicy.DESTROY
             });
 
+            table.AddGlobalSecondaryIndex(new GlobalSecondaryIndexProps
+            {
+                IndexName = "userid",
+                PartitionKey = new Attribute { Name = "userid", Type = AttributeType.STRING },
+            });
+    
             var readScaling = table.AutoScaleReadCapacity(new EnableScalingProps { MinCapacity = 1, MaxCapacity = 50 });
             readScaling.ScaleOnUtilization(new UtilizationScalingProps { TargetUtilizationPercent = 75 });
 
