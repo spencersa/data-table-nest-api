@@ -6,6 +6,7 @@ using Amazon.CDK.AWS.Apigatewayv2.Alpha;
 using Amazon.CDK.AWS.Apigatewayv2.Integrations.Alpha;
 using HttpMethod = Amazon.CDK.AWS.Apigatewayv2.Alpha.HttpMethod;
 using Amazon.CDK.AWS.Apigatewayv2.Authorizers.Alpha;
+using Amazon.CDK.AWS.APIGateway;
 
 namespace Infra
 {
@@ -19,7 +20,15 @@ namespace Infra
                 JwtAudience = new[] { "https://data-table-nest-api" }
             });
 
-            var api = new HttpApi(this, "data-table-nest-api");
+            var api = new HttpApi(this, "data-table-nest-api", new HttpApiProps
+            {
+                CorsPreflight = new CorsPreflightOptions
+                {
+                    AllowOrigins = Cors.ALL_ORIGINS,
+                    AllowHeaders = new[] {"*"},
+                    AllowMethods = new CorsHttpMethod[] {CorsHttpMethod.ANY}
+                }
+            });
 
             var tablesGetLambda = new Function(this, "TablesGet", new FunctionProps
             {
