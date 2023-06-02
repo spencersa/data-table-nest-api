@@ -3,9 +3,7 @@ using Amazon.Lambda.APIGatewayEvents;
 using System.Net;
 using Amazon.DynamoDBv2;
 using TablesLibrary;
-using Newtonsoft.Json;
 using Amazon.DynamoDBv2.DataModel;
-using Amazon.DynamoDBv2.DocumentModel;
 using TablesLibrary.Models;
 
 // Assembly attribute to enable the Lambda function's JSON input to be converted into a .NET class.

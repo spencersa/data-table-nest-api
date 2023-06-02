@@ -9,5 +9,7 @@ namespace TablesLibrary.Models
         public string id { get; set; }
         [DynamoDBGlobalSecondaryIndexHashKey]
         public string userid { get; set; }
+        [DynamoDBProperty(typeof(DataConverter))]
+        public List<object> values { get; set; }
     }
 }
