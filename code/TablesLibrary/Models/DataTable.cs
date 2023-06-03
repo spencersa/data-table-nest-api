@@ -11,5 +11,7 @@ namespace TablesLibrary.Models
         public string userid { get; set; }
         [DynamoDBProperty(typeof(DataConverter))]
         public List<object> values { get; set; }
+        [DynamoDBProperty]
+        public string title { get; set; }
     }
 }
