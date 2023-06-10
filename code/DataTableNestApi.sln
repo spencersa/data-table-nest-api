@@ -13,6 +13,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Debugger", "Debugger\Debugg
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TablesPost", "TablesPost\src\TablesPost.csproj", "{9F900963-0F73-47FC-A778-1ABC21E155E6}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TablesPut", "TablesPut\src\TablesPut.csproj", "{DD96808C-F22C-49BC-80C4-14D9F2BE3CDA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{9F900963-0F73-47FC-A778-1ABC21E155E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9F900963-0F73-47FC-A778-1ABC21E155E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9F900963-0F73-47FC-A778-1ABC21E155E6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DD96808C-F22C-49BC-80C4-14D9F2BE3CDA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DD96808C-F22C-49BC-80C4-14D9F2BE3CDA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DD96808C-F22C-49BC-80C4-14D9F2BE3CDA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DD96808C-F22C-49BC-80C4-14D9F2BE3CDA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

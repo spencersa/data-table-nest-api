@@ -46,8 +46,17 @@ namespace Infra
                 Timeout = Duration.Seconds(30),
             });
 
+            var tablesPutLambda = new Function(this, "TablesPut", new FunctionProps
+            {
+                Code = Code.FromAsset("../code/TablesPut/src/bin/Release/net6.0/src.zip"),
+                Handler = "TablesPut::TablesPut.Function::FunctionHandlerAsync",
+                Runtime = Runtime.DOTNET_6,
+                Timeout = Duration.Seconds(30),
+            });
+
             var tablesGetLambdaIntegration = new HttpLambdaIntegration("TablesGetLambdaIntegration", tablesGetLambda);
             var tablesPostLambdaIntegration = new HttpLambdaIntegration("TablesPostLambdaIntegration", tablesPostLambda);
+            var tablesPutLambdaIntegration = new HttpLambdaIntegration("TablesPostLambdaIntegration", tablesPutLambda);
 
             api.AddRoutes(new AddRoutesOptions
             {
@@ -62,6 +71,14 @@ namespace Infra
                 Path = "/tables",
                 Methods = new[] { HttpMethod.POST },
                 Integration = tablesPostLambdaIntegration,
+                Authorizer = authorizer
+            });
+
+            api.AddRoutes(new AddRoutesOptions
+            {
+                Path = "/tables",
+                Methods = new[] { HttpMethod.PUT },
+                Integration = tablesPutLambdaIntegration,
                 Authorizer = authorizer
             });
 
@@ -94,6 +111,7 @@ namespace Infra
 
             table.GrantReadData(tablesGetLambda);
             table.GrantWriteData(tablesPostLambda);
+            table.GrantWriteData(tablesPutLambda);
         }
     }
 }

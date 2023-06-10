@@ -31,9 +31,34 @@ namespace TablesLibrary
             return reurnValue;
         }
 
+
+        public DynamoDBList CreateListEntry()
+        {
+            var entry = new DynamoDBList();
+            return entry;
+        }
+
         public DynamoDBEntry ToEntry(object value)
         {
-            throw new NotImplementedException();
+            var entry = new DynamoDBList();
+            var valueList = value as IEnumerable<dynamic>;
+            foreach (var rawValue in valueList)
+            {
+                if (rawValue.values != null)
+                {
+                    var subEntry = new DynamoDBList();
+                    foreach (var subRawValue in rawValue.values)
+                    {
+                        subEntry.Add(Convert.ToString(subRawValue.value));
+                    }
+                    entry.Add(subEntry);
+                }
+                else
+                {
+                    entry.Add(Convert.ToString(rawValue.value));
+                }
+            }
+            return entry;
         }
     }
 }
